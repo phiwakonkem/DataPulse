@@ -1,75 +1,84 @@
-# React + TypeScript + Vite
+# DataPulse
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time analytics dashboard that visualizes live metrics — revenue, active users, requests/sec, and error rates — updating continuously with smooth, animated charts.
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-6-blue?logo=typescript) ![Recharts](https://img.shields.io/badge/Recharts-3-8884d8) ![TanStack Query](https://img.shields.io/badge/TanStack_Query-5-FF4154) ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- **Live metric tiles** — active users, requests/sec, error rate, average response time, refreshing every 2 seconds
+- **Revenue area chart** (24h) — gradient-filled trend visualization
+- **Active users line chart** (24h)
+- **API requests vs errors bar chart** (24h)
+- **Dark analytics UI** styled with Tailwind CSS and Recharts
 
-Note: This will impact Vite dev & build performances.
+## Tech Stack
 
-## Expanding the ESLint configuration
+| Layer | Technology |
+|---|---|
+| Framework | React 19 |
+| Language | TypeScript |
+| Build tool | Vite 8 |
+| Charts | Recharts |
+| Data fetching | TanStack Query |
+| Real-time (planned) | Socket.IO client |
+| Styling | Tailwind CSS |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## How Data Works Right Now
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+DataPulse currently generates **simulated data client-side** — 24 hourly data points are randomly generated on load, and the live metric tiles tick with small random deltas every 2 seconds via `setInterval`. This means **you can run and demo the full UI with no backend at all.**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+The `socket.io-client` dependency is included for a planned next step: replacing the simulated data with a real-time feed from a backend metrics service.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
+
+### Prerequisites
+
+- Node.js 20+
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/phiwakonkem/DataPulse.git
+cd DataPulse
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Run the development server
+
+```bash
+npm run dev
+```
+
+Visit the URL Vite prints (typically [http://localhost:5173](http://localhost:5173)). No backend setup needed — it works out of the box with simulated data.
+
+## Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the Vite dev server |
+| `npm run build` | Type-check and build for production |
+| `npm run lint` | Run ESLint |
+| `npm run preview` | Preview the production build locally |
+
+## Roadmap
+
+- [ ] Replace simulated data with a real Socket.IO backend feed
+- [ ] Add date-range selection for historical charts
+- [ ] Add export (CSV/PNG) for charts
+
+## Author
+
+**Phiwakonke Mthethwa**
+Full-Stack Developer, Centurion, South Africa
+
+- GitHub: [@phiwakonkem](https://github.com/phiwakonkem)
+- LinkedIn: [phiwakonke-mthethwa](https://www.linkedin.com/in/phiwakonke-mthethwa-97aa74331)
+- Email: phiwakonkem@gmail.com
